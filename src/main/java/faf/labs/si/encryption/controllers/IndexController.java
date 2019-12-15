@@ -109,16 +109,20 @@ public class IndexController {
 
     @PostMapping("/changeAccess")
     public String changeAccess(@ModelAttribute AccessManagement accessManagement, Model model) throws IOException {
+        String message = null;
 
-        if(accessManagement.getActionType() == ActionType.BLOCK_SITE){
-            fileService.blockSite(accessManagement.getSiteName());
-        }
-        else {
-            fileService.unblockSite(accessManagement.getSiteName());
+        if (accessManagement.getSiteName().isEmpty()) {
+            message = "site name can not be empty";
+        } else {
+            message = "Chosen site: " + accessManagement.getSiteName() +
+                    "\nChosen action: " + accessManagement.getActionType().toString();
+            if (accessManagement.getActionType() == ActionType.BLOCK_SITE) {
+                fileService.blockSite(accessManagement.getSiteName());
+            } else {
+                fileService.unblockSite(accessManagement.getSiteName());
+            }
         }
 
-        String message = "Chosen site: " + accessManagement.getSiteName() +
-                "\nChosen action: " + accessManagement.getActionType().toString();
         model.addAttribute("message", message);
         return "infoMessage";
     }
