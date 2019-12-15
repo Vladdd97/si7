@@ -16,14 +16,14 @@
 
         <div class="form-group">
             <label for="siteName">Site name</label>
-            <input class="form-control" id="siteName" placeholder="siteName" th:field="*{siteName}">
+            <input class="form-control" id="siteName" placeholder="Site name" th:field="*{siteName}">
         </div>
 
 
-        <!--<select th:field="*{actionType}">-->
-            <!--<option th:value="BLOCK_SITE" th:text="BLOCK_SITE"></option>-->
-            <!--<option th:value="UNBLOCK_SITE" th:text="UNBLOCK_SITE"></option>-->
-        <!--</select>-->
+        <select th:field="*{actionType}">
+            <option th:value="BLOCK_SITE" th:text="BLOCK_SITE"></option>
+            <option th:value="UNBLOCK_SITE" th:text="UNBLOCK_SITE"></option>
+        </select>
 
 
         <br>

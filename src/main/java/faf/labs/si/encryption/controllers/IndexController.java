@@ -109,7 +109,7 @@ public class IndexController {
 
     @PostMapping("/changeAccess")
     public String changeAccess(@ModelAttribute AccessManagement accessManagement, Model model){
-        String message = "Chosen action: ";// + accessManagement.getActionType().toString();
+        String message = "Chosen action: " + accessManagement.getActionType().toString();
         model.addAttribute("message", message);
         return "infoMessage";
     }
