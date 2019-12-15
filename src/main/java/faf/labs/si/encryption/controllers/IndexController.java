@@ -3,6 +3,7 @@ package faf.labs.si.encryption.controllers;
 import faf.labs.si.encryption.domain.AccessManagement;
 import faf.labs.si.encryption.domain.Credentials;
 import faf.labs.si.encryption.domain.User;
+import faf.labs.si.encryption.domain.util.ActionType;
 import faf.labs.si.encryption.services.Encoder;
 import faf.labs.si.encryption.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,10 +92,9 @@ public class IndexController {
         System.out.println(decodedUsername);
         System.out.println(decodedPassword);
 
-        if(username.equals(decodedUsername) && password.equals(decodedPassword)){
+        if (username.equals(decodedUsername) && password.equals(decodedPassword)) {
             message = "Match";
-        }
-        else {
+        } else {
             message = "Mismatch";
         }
         model.addAttribute("message", message);
@@ -102,14 +102,23 @@ public class IndexController {
     }
 
     @GetMapping("/accessManagement")
-    public String accessManagement(Model model){
+    public String accessManagement(Model model) {
         model.addAttribute("accessManagement", new AccessManagement());
         return "sitesAccessManagement";
     }
 
     @PostMapping("/changeAccess")
-    public String changeAccess(@ModelAttribute AccessManagement accessManagement, Model model){
-        String message = "Chosen action: " + accessManagement.getActionType().toString();
+    public String changeAccess(@ModelAttribute AccessManagement accessManagement, Model model) throws IOException {
+
+        if(accessManagement.getActionType() == ActionType.BLOCK_SITE){
+            fileService.blockSite(accessManagement.getSiteName());
+        }
+        else {
+            fileService.unblockSite(accessManagement.getSiteName());
+        }
+
+        String message = "Chosen site: " + accessManagement.getSiteName() +
+                "\nChosen action: " + accessManagement.getActionType().toString();
         model.addAttribute("message", message);
         return "infoMessage";
     }
