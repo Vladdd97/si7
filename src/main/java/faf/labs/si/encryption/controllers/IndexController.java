@@ -7,19 +7,24 @@ import faf.labs.si.encryption.domain.util.ActionType;
 import faf.labs.si.encryption.services.Encoder;
 import faf.labs.si.encryption.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.jws.WebParam;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 //@RequestMapping("/index")
@@ -108,22 +113,28 @@ public class IndexController {
     }
 
     @PostMapping("/changeAccess")
-    public String changeAccess(@ModelAttribute AccessManagement accessManagement, Model model) throws IOException {
-        String message = null;
+    public String changeAccess(@Valid AccessManagement accessManagement, BindingResult bindingResult, Model model) throws IOException {
 
-        if (accessManagement.getSiteName().isEmpty()) {
-            message = "site name can not be empty";
-        } else {
-            message = "Chosen site: " + accessManagement.getSiteName() +
-                    "\nChosen action: " + accessManagement.getActionType().toString();
-            if (accessManagement.getActionType() == ActionType.BLOCK_SITE) {
-                fileService.blockSite(accessManagement.getSiteName());
-            } else {
-                fileService.unblockSite(accessManagement.getSiteName());
-            }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("message",
+                    bindingResult
+                            .getFieldErrors()
+                            .stream()
+                            .collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage))
+
+            );
+            return "infoMessage";
         }
 
-        model.addAttribute("message", message);
+        if (accessManagement.getActionType() == ActionType.BLOCK_SITE) {
+            fileService.blockSite(accessManagement.getSiteName());
+        } else {
+            fileService.unblockSite(accessManagement.getSiteName());
+        }
+
+
+        model.addAttribute("message", "Chosen site: " + accessManagement.getSiteName() +
+                "\nChosen action: " + accessManagement.getActionType().toString());
         return "infoMessage";
     }
 
