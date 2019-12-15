@@ -1,5 +1,6 @@
 package faf.labs.si.encryption.controllers;
 
+import faf.labs.si.encryption.domain.AccessManagement;
 import faf.labs.si.encryption.domain.Credentials;
 import faf.labs.si.encryption.domain.User;
 import faf.labs.si.encryption.services.Encoder;
@@ -102,8 +103,15 @@ public class IndexController {
 
     @GetMapping("/accessManagement")
     public String accessManagement(Model model){
-
+        model.addAttribute("accessManagement", new AccessManagement());
         return "sitesAccessManagement";
+    }
+
+    @PostMapping("/changeAccess")
+    public String changeAccess(@ModelAttribute AccessManagement accessManagement, Model model){
+        String message = "Chosen action: ";// + accessManagement.getActionType().toString();
+        model.addAttribute("message", message);
+        return "infoMessage";
     }
 
 
