@@ -1,0 +1,38 @@
+
+<div th:fragment="navbar" >
+    <!--this span contains all css files-->
+    <span>
+        <link rel="stylesheet" th:href="@{/public/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    </span>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">LOGO</a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarsExample07" style="">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a th:href="@{/credentialsForm}" class="nav-link">HOME</a>
+                    </li>
+
+                    <!--<li class="nav-item">-->
+                        <!--<a th:href="@{/credentialsForm}" class="nav-link">HOME</a>-->
+                    <!--</li>-->
+
+                </ul>
+                <form class="form-inline my-2 my-md-0">
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+
+</div>

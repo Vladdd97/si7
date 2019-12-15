@@ -7,15 +7,13 @@
 </head>
 <body>
 
-<span>
-        <link rel="stylesheet" th:href="@{/public/css/bootstrap.min.css}" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    </span>
+
+<th:block th:include="partialViews/navbar :: navbar"></th:block>
+
 
 <div class="col-lg-5">
-    <form method="post" th:action="@{/registerNewUser}" th:object="${user}" class="login-form">
+    <form method="post" th:action="@{/getCredentials}" th:object="${user}" class="login-form">
 
         <h2 class="loginTitle">Lab.7-SI</h2>
 
@@ -44,14 +42,8 @@
 
 
 
+<th:block th:include="partialViews/footer :: footer"></th:block>
 
-
-<span>
-
-        <script type="text/javascript" th:src="@{/public/js/jquery.min.js}"></script>
-        <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
-
-    </span>
 
 
 </body>
