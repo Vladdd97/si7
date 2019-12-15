@@ -81,7 +81,6 @@ public class IndexController {
 
     @PostMapping("/checkCredentials")
     public String checkCredentials(@ModelAttribute Credentials credentials, Model model) throws IOException {
-        String message = null;
         fileService.saveFile(credentials.getFile());
         List<String> list = fileService.readFileContent();
         String username = credentials.getUser().getUsername();
@@ -98,11 +97,9 @@ public class IndexController {
         System.out.println(decodedPassword);
 
         if (username.equals(decodedUsername) && password.equals(decodedPassword)) {
-            message = "Match";
-        } else {
-            message = "Mismatch";
+            return "redirect:/accessManagement";
         }
-        model.addAttribute("message", message);
+        model.addAttribute("message", "Incorrect credentials");
         return "infoMessage";
     }
 
