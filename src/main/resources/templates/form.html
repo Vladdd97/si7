@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<span>
+        <link rel="stylesheet" th:href="@{/public/css/bootstrap.min.css}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    </span>
+
+<div class="col-lg-5">
+    <form method="post" th:action="@{/registerNewUser}" th:object="${user}" class="login-form">
+
+        <h2 class="loginTitle">Lab.7-SI</h2>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input class="form-control" id="username" placeholder="Username" th:field="*{username}">
+        </div>
+
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
+        </div>
+
+        <!--<div class="form-group">-->
+            <!---->
+            <!--<input type="file" id="myFile" name="filename2">-->
+
+        <!--</div>-->
+
+        <br>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+
+
+<span>
+
+        <script type="text/javascript" th:src="@{/public/js/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
+
+    </span>
+
+
+</body>
+</html>
