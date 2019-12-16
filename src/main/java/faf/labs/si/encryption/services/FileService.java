@@ -1,5 +1,6 @@
 package faf.labs.si.encryption.services;
 
+import faf.labs.si.encryption.domain.util.PathManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,8 +16,8 @@ import java.util.stream.Collectors;
 @Service
 public class FileService {
 
-    private Path hostPath = Paths.get("C:\\Windows\\System32\\drivers\\etc\\hosts");
-    private File userFile = new File("C:\\Users\\Vlad\\Desktop\\si_lab_7\\check.txt");
+    private Path hostPath = Paths.get(PathManager.HOST_PATH);
+    private File userFile = new File(PathManager.CHECK_CREDENTIALS_PATH);
 
     public void unblockSite(String text) throws IOException {
         List<String> list = Files.readAllLines(hostPath);

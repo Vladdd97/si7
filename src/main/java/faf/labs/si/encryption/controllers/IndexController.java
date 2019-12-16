@@ -4,6 +4,7 @@ import faf.labs.si.encryption.domain.AccessManagement;
 import faf.labs.si.encryption.domain.Credentials;
 import faf.labs.si.encryption.domain.User;
 import faf.labs.si.encryption.domain.util.ActionType;
+import faf.labs.si.encryption.domain.util.PathManager;
 import faf.labs.si.encryption.services.Encoder;
 import faf.labs.si.encryption.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class IndexController {
 
         String encryptedUsername = (encoder.encryption(user.getUsername(), KEY));
         String encryptedPassword = (encoder.encryption(user.getPassword(), KEY));
-        Path path = Paths.get("C:\\Users\\Vlad\\Desktop\\si_lab_7\\testFile.txt");
+        Path path = Paths.get(PathManager.SAVE_CREDENTIALS_PATH);
         Files.write(path, Arrays.asList(encryptedUsername, encryptedPassword));
         String message = "File with your credentials was generated in: \n" + path.toString();
         model.addAttribute("message", message);
