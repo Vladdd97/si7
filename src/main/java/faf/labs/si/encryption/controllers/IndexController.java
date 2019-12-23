@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,12 +30,11 @@ import java.util.stream.Collectors;
 //@RequestMapping("/index")
 public class IndexController {
 
+    private static final int KEY = 3;
     @Autowired
     private Encoder encoder;
     @Autowired
     private FileService fileService;
-
-    private static final int KEY = 3;
 
     @GetMapping("/credentialsForm")
     public String credentialsForm(Model model) {
